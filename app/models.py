@@ -1,8 +1,9 @@
 from . import db
 import views
+from random import randint
 from marshmallow import Schema, fields
 
-class UserProfile(db.Model):
+class Test(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   
@@ -26,9 +27,9 @@ class UserProfile(db.Model):
   
   
 
-  def __init__(self, userid, pic, fname, lname, age, sex):
+  def __init__(self, pic, fname, lname, age, sex):
     
-    self.userid = userid
+    self.userid = randint(10000000,99999999)
     
     self.pic = pic
  

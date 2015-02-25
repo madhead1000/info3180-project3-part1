@@ -1,8 +1,10 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 
+
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg'])
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

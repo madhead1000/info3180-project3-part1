@@ -9,11 +9,10 @@ import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 import  time
-from random import randint
 from app import app
 from flask import render_template, request, redirect, url_for
 from app import db
-from app.models import UserProfile
+from app.models import Test
 from .forms import ProfileForm
 from flask import jsonify,session,json
 from random import randint
@@ -30,16 +29,14 @@ from flask_wtf.file import FileField
 
 @app.route('/profile/', methods=["GET", "POST"])
 def theform():
-  form = ProfileForm()
-  if request.method == 'POST':
+  form = ProfileForm(request.form)
+  if request.method == 'POST' and form.validate():
     file = request.files['pic']
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
       file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-      userid = randint(10000000,99999999)
       img = "uploads/"+filename
-      new_user = UserProfile(
-        userid,
+      new_user = Test(
         img,
         form.fname.data,
         form.lname.data,
@@ -69,7 +66,8 @@ def home():
   
 @app.route('/profiles/', methods=["GET"])
 def get_current_user():
-  users = db.session.query(UserProfile).all()
+  db.create_all()
+  users = db.session.query(Test).all()
   jsonifier = UserSchema(many=True)
   result = jsonifier.dump(users)
   return jsonify({"Users": result.data})
@@ -77,7 +75,7 @@ def get_current_user():
   
 @app.route('/profile/<userid>', methods=["GET"])
 def get_user(userid):
-  user= UserProfile.query.filter_by(userid = userid).first()
+  user= Test.query.filter_by(userid = userid).first()
   date=str(user.date_created)
   return jsonify(userid=user.userid, pic=user.pic, age=user.age, sex=user.sex, profile_add_on=date)
 
