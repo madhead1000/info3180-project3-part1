@@ -12,7 +12,7 @@ import  time
 from app import app
 from flask import render_template, request, redirect, url_for
 from app import db
-from app.models import Test
+from app.models import User
 from .forms import ProfileForm
 from flask import jsonify,session,json
 from random import randint
@@ -36,7 +36,7 @@ def theform():
       filename = secure_filename(file.filename)
       file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
       img = "uploads/"+filename
-      new_user = Test(
+      new_user = User(
         img,
         form.fname.data,
         form.lname.data,
@@ -67,7 +67,7 @@ def home():
 @app.route('/profiles/', methods=["GET"])
 def get_current_user():
   db.create_all()
-  users = db.session.query(Test).all()
+  users = db.session.query(User).all()
   jsonifier = UserSchema(many=True)
   result = jsonifier.dump(users)
   return jsonify({"Users": result.data})
@@ -75,7 +75,7 @@ def get_current_user():
   
 @app.route('/profile/<userid>', methods=["GET"])
 def get_user(userid):
-  user= Test.query.filter_by(userid = userid).first()
+  user= User.query.filter_by(userid = userid).first()
   date=str(user.date_created)
   return jsonify(userid=user.userid, pic=user.pic, age=user.age, sex=user.sex, profile_add_on=date)
 
