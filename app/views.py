@@ -30,7 +30,7 @@ from flask_wtf.file import FileField
 @app.route('/profile/', methods=["GET", "POST"])
 def theform():
   form = ProfileForm(request.form)
-  if request.method == 'POST' and form.validate():
+  if request.method == 'POST':
     file = request.files['pic']
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
