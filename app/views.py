@@ -80,12 +80,6 @@ def get_user(userid):
   return jsonify(userid=user.userid, pic=user.pic, age=user.age, sex=user.sex, profile_add_on=date)
 
 
-@app.route('/profiler/', methods=["GET"])
-def get_user():
-  user= User.query.get(1)
-  date=str(user.date_created)
-  return jsonify(userid=user.userid, pic=user.pic, age=user.age, sex=user.sex, profile_add_on=date)
-
 
 @app.route('/about/')
 def about():
