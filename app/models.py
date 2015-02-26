@@ -3,7 +3,7 @@ import views
 from random import randint
 from marshmallow import Schema, fields
 
-class Users(db.Model):
+class User(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   
@@ -19,7 +19,7 @@ class Users(db.Model):
   
   sex = db.Column(db.String(8))
   
-  date_created = db.Column(db.DateTime())
+  date_created = db.Column(db.Date())
   
   High_score = db.Column(db.Integer)
   
