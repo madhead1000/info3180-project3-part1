@@ -19,7 +19,7 @@ class Test(db.Model):
   
   sex = db.Column(db.String(8))
   
-  date_created = db.Column(db.Date())
+  date_created = db.Column(db.DateTime())
   
   High_score = db.Column(db.Integer)
   
