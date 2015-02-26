@@ -3,7 +3,7 @@ import views
 from random import randint
 from marshmallow import Schema, fields
 
-class Test(db.Model):
+class Users(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   
