@@ -46,9 +46,11 @@ def theform():
       db.session.add(new_user)
       db.session.commit()
       return redirect(url_for('theform',
-                                    filename=filename))
+                                    status=status()))
   return render_template('theform.html',form=form)
 
+def status():
+  return "Your Profile has Been Successfully Created"
 
 def allowed_file(filename):
   return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
