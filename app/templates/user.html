@@ -1,14 +1,9 @@
 <style>
-  .body{
-    background-color:darkgreen;
-  }
-  
   .profile{
     float:left;
   }
   
   .container{
-    margin-top:5px;
     float:left;
     width:800px;
     border:1px solid grey;
@@ -47,8 +42,6 @@
   }
   
 </style>
-<body>
-{% for user in users %}
 <div class="container">
 <div class="profile">
 <img src="/static/img/{{user.pic}}" style="width:200px;height:200px">
@@ -70,8 +63,7 @@
   <p><strong>Age:</strong>  {{user.age}}</p>
   <p><strong>Highest score:</strong>  {{user.High_score}}</p>
   <p><strong>TDolors:</strong>  {{user.TDollars}}</p>
-  <button onclick="location.href='../profile/{{user.userid}}'" type="button" style="float:right; border-radius: 25px;">View {{user.fname}}'s Profile</button>
+ 
   </div>
 </div>
-{% endfor %}
-</body>
+</ hr>

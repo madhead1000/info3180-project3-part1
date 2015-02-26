@@ -6,13 +6,13 @@ Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
 import os
-from flask import Flask
+from flask import Flask, url_for
 from flask.ext.sqlalchemy import SQLAlchemy
 import  time
 from app import app
 from flask import render_template, request, redirect, url_for
 from app import db
-from app.models import User
+from app.models import Test
 from .forms import ProfileForm
 from flask import jsonify,session,json
 from random import randint
@@ -21,7 +21,7 @@ from werkzeug import secure_filename
 from flask_wtf.file import FileField
 
 
-
+ALLOWED_EXTENSIONS = set(['png', 'jpg'])
 
 ###
 # Routing for your application.
@@ -35,8 +35,8 @@ def theform():
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
       file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-      img = "uploads/"+filename
-      new_user = User(
+      img = filename
+      new_user = Test(
         img,
         form.fname.data,
         form.lname.data,
@@ -49,7 +49,6 @@ def theform():
                                     filename=filename))
   return render_template('theform.html',form=form)
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg'])
 
 def allowed_file(filename):
   return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
@@ -64,20 +63,23 @@ def home():
     return render_template('home.html')
 
   
-@app.route('/profiles/', methods=["GET"])
+@app.route('/profiles/', methods=["GET", "POST"])
 def get_current_user():
-  db.create_all()
-  users = db.session.query(User).all()
-  jsonifier = UserSchema(many=True)
-  result = jsonifier.dump(users)
-  return jsonify({"Users": result.data})
+  users = db.session.query(Test).all()
+  if request.method =='Post':
+    jsonifier = UserSchema(many=True)
+    result = jsonifier.dump(users)
+    return jsonify({"Users": result.data})
+  return render_template('profile.html', users=users)
 
   
-@app.route('/profile/<userid>', methods=["GET"])
+@app.route('/profile/<userid>', methods=["GET", "POST"])
 def get_user(userid):
-  user= User.query.filter_by(userid = userid).first()
+  user= Test.query.filter_by(userid = userid).first()
+  if request.method == "GET":
+    return render_template('user.html', user=user)
   date=str(user.date_created)
-  return jsonify(userid=user.userid, pic=user.pic, age=user.age, sex=user.sex, profile_add_on=date)
+  return jsonify(userid=user.userid, pic=pic, age=user.age, sex=user.sex, profile_add_on=date)
 
 
 

@@ -30,4 +30,3 @@ class ProfileForm(Form):
   age = IntegerField('Age', validators=[Required("Please enter your age.")])
   submit = SubmitField('Create Account')
   
-  
