@@ -26,7 +26,17 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg'])
 ###
 # Routing for your application.
 ###
-
+@app.route('/game/', methods=["GET"])
+def games():
+   return render_template('games.html')
+  
+@app.route('/game/<int:id>', methods=["GET"])
+def game(id):
+  if id == 1:
+    return render_template('space-invader.html')
+  if id == 2:
+   return render_template('platformer.html')
+  
 @app.route('/profile/', methods=["GET", "POST"])
 def theform():
   form = ProfileForm(request.form)

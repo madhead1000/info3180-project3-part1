@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+
+{% block js %}
+{% endblock %}
+
+
+{% block main %}
+<dev class"container">
+<div class="jumbotron">
+  <h1>Clasic Games</h1>
+  <p>Play classic online games for free!!!!</p>
+  <p>Please select a game below</p>
+  <p><a class="btn btn-primary btn-lg" href="/" role="button">Go Back Home</a></p>
+</div>
+<div class="col-md-6">
+<div class="ih-item square effect7"><a href="1">
+        <div class="img"><img src="/static/img/space-invader.png" alt="img"></div>
+        <div class="info">
+          <h3><span class="label label-info">Space Invader</span></h3>
+          <p>Click Here to Play</p>
+        </div></a></div>
+</div>
+<div class="col-md-6">
+<div class="ih-item square effect7"><a href="2">
+        <div class="img"><img src="/static/img/platformer.png" alt="img"></div>
+        <div class="info">
+          <h3><span class="label label-danger">Platformer</span></h3>
+          <p>Click Here to Play</p>
+        </div></a></div>
+  </div>
+</div>
+{% endblock %}

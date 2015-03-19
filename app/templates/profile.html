@@ -1,57 +1,21 @@
-<style>
+{% extends "base.html" %}
 
-  .profile{
-    float:left;
-  }
-  
-  .container{
-    margin-top:5px;
-    float:left;
-    width:800px;
-    border:1px solid grey;
-    border-radius: 25px;
-    padding:20px;
-    background-color:grey;
-  }
-  
-  .name{
-    float:right;
-    width:500;
-    border:1px solid black;
-    border-radius: 25px;
-    padding:2px;
-    background-color:cyan;
-  }
-  
-  .info{
-    margin-top:20px;
-    float:right;
-    width:400;
-    border:1px solid black;
-    border-radius: 25px;
-    background-color:cyan;
-	  padding:20px;
-  }
-  
-  .time{
-    margin-top:40px;
-    float:right;
-    width:420;
-    border:1px solid black;
-    border-radius: 25px;
-    padding:10px;
-    background-color:cyan;
-  }
-  
-</style>
 
+{% block js %}
+{% endblock %}
+
+
+{% block main %}
 {% for user in users %}
-<div class="container">
-<div class="profile">
+  <div class="from_top">
+  <div class="container_box">
+  <div class="profile">
+  <div class="col-md-6">
 <img src="/static/img/{{user.pic}}" style="width:200px;height:200px">
+  </div>
 </div>
-
- 
+<div class="row">
+ <div class="col-md-6">
   <div class="name">
   <h1>{{user.fname}} {{user.lname}}</h1>
   </div>
@@ -68,6 +32,11 @@
   <p><strong>Highest score:</strong>  {{user.High_score}}</p>
   <p><strong>TDolors:</strong>  {{user.TDollars}}</p>
   <button onclick="location.href='../profile/{{user.userid}}'" type="button" style="float:right; border-radius: 25px;">View {{user.fname}}'s Profile</button>
+   </div>
   </div>
 </div>
+</div>
+    </div>
+<br />
 {% endfor %}
+{% endblock %}
