@@ -8,6 +8,11 @@
  **/
 
 var game = {
+  
+  data : {
+		// score
+		score : 0
+	},
 
     // Run on page load.
     "onload" : function () {

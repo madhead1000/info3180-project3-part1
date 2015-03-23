@@ -21,6 +21,12 @@ game.PlayScreen = me.ScreenObject.extend({
         this.enemyManager = new game.EnemyManager();
         this.enemyManager.createEnemies();
         me.game.world.addChild(this.enemyManager, 2);
+              // reset the score
+             game.data.score = 0;
+
+            // add our HUD to the game world
+            this.HUD = new game.HUD.Container();
+            me.game.world.addChild(this.HUD);
     },
 
 
@@ -33,5 +39,7 @@ game.PlayScreen = me.ScreenObject.extend({
         me.input.unbindKey(me.input.KEY.A);
         me.input.unbindKey(me.input.KEY.D);
         me.input.unbindKey(me.input.KEY.SPACE);
+  // remove the HUD from the game world
+		     me.game.world.removeChild(this.HUD);
     }
 });
