@@ -47,6 +47,7 @@ var game = {
 		me.pool.register("mainPlayer", game.PlayerEntity);
 		me.pool.register("CoinEntity", game.CoinEntity);
 		me.pool.register("EnemyEntity", game.EnemyEntity);
+    me.pool.register("DangerEntity", game.DangerEntity);
 			
 		// enable the keyboard
 		me.input.bindKey(me.input.KEY.LEFT,		"left");

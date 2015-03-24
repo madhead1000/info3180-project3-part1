@@ -12,7 +12,7 @@ game.PlayerEntity = me.Entity.extend({
         this._super(me.Entity, 'init', [x, y , settings]);
         
         // set the default horizontal & vertical speed (accel vector)
-        this.body.setVelocity(3, 15);
+        this.body.setVelocity(3.5, 15);
              
         // set the display to follow our position on both axis
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
@@ -240,6 +240,25 @@ game.EnemyEntity = me.Entity.extend({
       // res.y >0 means touched by something on the bottom
       // which mean at top position for this one
       if (this.alive && (response.overlapV.y > 0) && response.a.body.falling) {
+        this.renderable.flicker(750);
+      }
+      return false;
+    }
+    // Make all other objects solid
+    return true;
+  }
+});
+
+
+
+game.DangerEntity = me.Entity.extend({
+  
+ 
+  onCollision : function (response, other) {
+    if (response.b.body.collisionType !== me.collision.types.WORLD_SHAPE) {
+      // res.y >0 means touched by something on the bottom
+      // which mean at top position for this one
+      if (this.alive && (response.overlapV.y > 1) && response.a.body.falling) {
         this.renderable.flicker(750);
       }
       return false;
